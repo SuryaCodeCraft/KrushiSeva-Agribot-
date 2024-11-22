@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Assistant Chat</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f9f9f9;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .chat-header {
+      background: #28a745;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .chat-header button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .chat-header button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .chat-header button:hover svg {
+      fill: #d9d9d9;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 70%;
+      line-height: 1.5;
+    }
+
+    .bot-message {
+      background: #f1f1f1;
+      align-self: flex-start;
+      color: #333;
+    }
+
+    .user-message {
+      background: #28a745;
+      align-self: flex-end;
+      color: white;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 15px;
+      background: #f9f9f9;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input textarea {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: none;
+      outline: none;
+    }
+
+    .chat-input button {
+      background: none;
+      border: none;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-input button svg {
+      width: 28px;
+      height: 28px;
+      fill: #28a745;
+    }
+
+    .chat-input button svg:hover {
+      fill: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <button onclick="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+        Back
+      </button>
+      Chat Assistant
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="message bot-message">Hello! I'm Farmer Assistant. How can I help you today?</div>
+    </div>
+    <div class="chat-input">
+      <textarea id="user-input" placeholder="Ask me anything about farming..." rows="1"></textarea>
+      <button id="send-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const sendBtn = document.getElementById('send-btn');
+    const userInput = document.getElementById('user-input');
+    const chatMessages = document.getElementById('chat-messages');
+
+    // Function to add a message to the chat
+    function addMessage(sender, text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+      messageDiv.textContent = text;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to the bottom
+    }
+
+    // Predefined responses for specific inputs
+    const predefinedResponses = {
+      // Greetings
+      "hi": "Hello! How can I assist you with your farming today?",
+      "hello": "Hello! How can I assist you with your farming today?",
+      "how are you": "I'm doing great! How can I assist you today?",
+      "help": "I'm here to help! Ask me anything related to farming.",
+      "who are you": "I'm Farmer Assistant, your virtual farming assistant.",
+      "can you help me": "Yes, I can help you with all your farming-related queries.",
+      "what is this for": "This assistant is here to provide farming advice and information.",
+      "good morning": "Good morning! How can I help you today?",
+      "good evening": "Good evening! How can I assist you?",
+      "thank you": "You're welcome! Let me know if you need more help.",
+      
+      // Crops Section
+      "what crops can i grow": "You can grow rice, wheat, maize, and other crops based on your region and season.",
+      "what crops can be planted": "Please specify your region and current season for a better suggestion.",
+      "best crops for rainy season": "Rice and sugarcane are ideal for rainy season.",
+      "best crops for dry season": "Wheat, millet, and pulses are suitable for dry season.",
+      "what is the best crop for my region": "Please tell me your region, and I'll suggest the best crops.",
+      "high yield crops": "Crops like rice, maize, and wheat tend to give high yields.",
+      "crops for sandy soil": "Crops like carrots, tomatoes, and watermelon do well in sandy soil.",
+      "crops for clay soil": "Rice, wheat, and lentils thrive in clay soil.",
+      "crops for hilly areas": "Crops like tea, coffee, and some fruits do well in hilly areas.",
+      "crops for small farms": "For small farms, you can try vegetables, fruits, or medicinal plants.",
+      
+      // Weather Section
+      "current weather": "It is sunny and clear in most regions today.",
+      "what is the weather like today": "The temperature is moderate with clear skies.",
+      "is it raining today": "No, it is not raining today. It's mostly sunny.",
+      "will it rain tomorrow": "Tomorrow, there is a 30% chance of rainfall.",
+      "how is the weather in this season": "This season is expected to be mild with some occasional rain.",
+      "what is the temperature now": "The current temperature is 28°C.",
+      "weather forecast for tomorrow": "The forecast for tomorrow is partly cloudy with temperatures between 24°C and 30°C.",
+      "is it a good day for farming": "Yes, the weather is favorable for farming today.",
+      "how much sunlight will we get": "We are expecting around 8 hours of sunlight today.",
+      "when will it get cooler": "It will start cooling down after 6 PM, with temperatures dropping to 22°C.",
+
+      // Schemes Section
+      "available government schemes": "Popular schemes include PM-KISAN, KCC (Kisan Credit Card), and Pradhan Mantri Fasal Bima Yojana.",
+      "how can i get government subsidies": "You can apply for subsidies through your local agriculture department or the PM-KISAN portal.",
+      "what is pm-kisan": "PM-KISAN is a direct income support scheme for farmers, offering ₹6,000 annually in three installments.",
+      "how to apply for kisan credit card": "Visit your local bank or the official website to apply for a Kisan Credit Card.",
+      "what is pradhan mantri fasal bima yojana": "This scheme offers crop insurance against natural calamities and helps farmers recover losses.",
+      "can i get loans for farming": "Yes, you can avail loans under the Kisan Credit Card scheme or through NABARD.",
+      "how to apply for crop insurance": "Apply for crop insurance under the PMFBY scheme through your local bank or insurance provider.",
+      "benefits of kisan credit card": "The KCC provides farmers with affordable credit for crop cultivation and emergency needs.",
+      "what is soil health card scheme": "This scheme provides farmers with soil health cards to help them understand soil quality and optimize fertilizer use.",
+      "how can i avail of interest subsidy": "Farmers can avail of interest subsidies on loans under schemes like KCC by visiting their bank.",
+    };
+
+    // Function to calculate similarity with word-level matching
+    function getSimilarity(input, keyword) {
+      input = input.toLowerCase();
+      keyword = keyword.toLowerCase();
+
+      const inputWords = input.split(/\s+/); // Split input into words
+      const keywordWords = keyword.split(/\s+/); // Split keyword into words
+
+      let matchCount = 0;
+
+      inputWords.forEach(word => {
+        if (keywordWords.includes(word)) {
+          matchCount++;
+        }
+      });
+
+      return (matchCount / keywordWords.length) * 100;
+    }
+
+    // Handle user input with improved fuzzy matching
+    function handleInput(input) {
+      input = input.toLowerCase();
+      let bestMatch = { keyword: null, similarity: 0 };
+
+      for (let keyword in predefinedResponses) {
+        const similarity = getSimilarity(input, keyword);
+        if (similarity > bestMatch.similarity) {
+          bestMatch = { keyword, similarity };
+        }
+      }
+
+      if (bestMatch.similarity > 60) {
+        addMessage('bot', predefinedResponses[bestMatch.keyword]);
+      } else if (bestMatch.similarity > 30) {
+        addMessage(
+          'bot',
+          `I'm not sure, but here's something related: ${predefinedResponses[bestMatch.keyword]}`
+        );
+      } else {
+        addMessage(
+          'bot',
+          "I'm sorry, I couldn't understand that. Please try rephrasing or asking about farming topics like crops, weather, schemes, or market prices."
+        );
+      }
+    }
+
+    // Handle the send button click
+    sendBtn.addEventListener('click', () => {
+      const userText = userInput.value.trim();
+      if (userText) {
+        addMessage('user', userText);
+        handleInput(userText);
+        userInput.value = ''; // Clear input field
+      }
+    });
+
+    // Handle enter key press for sending messages
+    userInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendBtn.click();
+      }
+    });
+
+    // Back button functionality (optional)
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

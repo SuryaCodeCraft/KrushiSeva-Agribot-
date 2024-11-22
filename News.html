@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krushiseva - Latest News</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0; /* Remove default margin */
+      padding: 0; /* Remove default padding */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: #4caf50; /* Green color for header */
+      color: #fff;
+      width: 100%;
+      padding: 20px 10px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed; /* Fix header to the top */
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .header img {
+      height: 50px; /* Example logo size */
+      margin-right: 10px;
+    }
+
+    .content-container {
+      padding-top: 80px; /* Add space below the fixed header */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .latest-news {
+      background-color: #fff;
+      border-radius: 8px;
+      border: 2px solid #4caf50; /* Green border */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      max-width: 600px;
+      width: 90%;
+      height: 400px; /* Fixed height for the box */
+      overflow-y: auto; /* Enables scrolling inside the box */
+    }
+
+    .news-item {
+      border-bottom: 1px solid #eee;
+      padding: 12px 0;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-tag {
+      display: inline-block;
+      background-color: #e0f7fa;
+      color: #00796b;
+      font-size: 0.875rem;
+      padding: 4px 8px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .news-tag.technology {
+      background-color: #c8e6c9;
+      color: #2e7d32;
+    }
+
+    .news-tag.policy {
+      background-color: #ffe0b2;
+      color: #e65100;
+    }
+
+    .news-tag.success-stories {
+      background-color: #d1c4e9;
+      color: #4527a0;
+    }
+
+    .news-item h3 {
+      font-size: 1.8rem;
+      margin: 8px 0;
+    }
+
+    .news-item p {
+      font-size: 0.95rem;
+      color: #010101;
+    }
+
+    .news-item a {
+      display: inline-block;
+      color: #1e88e5;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .news-item a:hover {
+      text-decoration: underline;
+    }
+
+    .news-date {
+      font-size: 1rem;
+      color: #000000;
+      float: right;
+    }
+
+    .go-back {
+      margin-top: 20px;
+      display: inline-block;
+      background-color: #4caf50; /* Green color */
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .go-back:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Logo -->
+  <div class="header">
+    <img src="c:\\Users\\Lakhashree\\Downloads\\News.png" alt="Logo">
+    Latest News
+  </div>
+
+  <!-- Content Container -->
+  <div class="content-container">
+    <!-- News Section -->
+    <div class="latest-news">
+      <div class="news-item">
+        <div class="news-tag technology">Technology</div>
+        <h3>New Sustainable Farming Techniques</h3>
+        <p>Learn about the latest innovations in sustainable farming practices...</p>
+        <a href="#">Read more →</a>
+        <span class="news-date">2024-03-15</span>
+      </div>
+
+      <div class="news-item">
+        <div class="news-tag policy">Policy</div>
+        <h3>Government Announces Farming Subsidies</h3>
+        <p>New policy changes bring additional support for local farmers...</p>
+        <a href="#">Read more →</a>
+        <span class="news-date">2024-03-14</span>
+      </div>
+
+      <div class="news-item">
+        <div class="news-tag success-stories">Success Stories</div>
+        <h3>Organic Farming Success Stories</h3>
+        <p>Local farmers share their experiences with organic farming methods...</p>
+        <a href="#">Read more →</a>
+        <span class="news-date">2024-03-13</span>
+      </div>
+
+      <div class="news-item">
+        <div class="news-tag technology">Technology</div>
+        <h3>AI in Agriculture</h3>
+        <p>Discover how artificial intelligence is transforming farming...</p>
+        <a href="#">Read more →</a>
+        <span class="news-date">2024-03-12</span>
+      </div>
+
+      <div class="news-item">
+        <div class="news-tag policy">Policy</div>
+        <h3>New Water Conservation Laws</h3>
+        <p>Learn about recent regulations aimed at improving water use in farming...</p>
+        <a href="#">Read more →</a>
+        <span class="news-date">2024-03-11</span>
+      </div>
+
+      <div class="news-item">
+        <div class="news-tag success-stories">Success Stories</div>
+        <h3>Farmers' Cooperatives Boost Yields</h3>
+        <p>Local farmers' cooperatives show significant productivity growth...</p>
+        <a href="#">Read more →</a>
+        <span class="news-date">2024-03-10</span>
+      </div>
+    </div>
+
+    <!-- Go Back Button -->
+    <a href="Home.html" class="go-back">Go Back</a>
+  </div>
+  <script>
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split('T')[0];
+    
+    // Select all the date elements
+    const newsDates = document.querySelectorAll('.news-date');
+    
+    // Update each date element with today's date
+    newsDates.forEach(dateElement => {
+      dateElement.textContent = today;
+    });
+  </script>
+</body>
+</html>
