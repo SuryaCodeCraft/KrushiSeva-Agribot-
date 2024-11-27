@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krushiseva - Latest News</title>
+  <title>Krushiseva - Agriculture News</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
-      margin: 0; /* Remove default margin */
-      padding: 0; /* Remove default padding */
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,42 +21,42 @@
       background-color: #4caf50; /* Green color for header */
       color: #fff;
       width: 100%;
-      padding: 20px 10px;
+      padding: 15px;
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: fixed; /* Fix header to the top */
+      position: fixed;
       top: 0;
       left: 0;
       z-index: 1000;
     }
 
     .header img {
-      height: 50px; /* Example logo size */
+      height: 75px; /* Adjusted logo size */
       margin-right: 10px;
     }
 
     .content-container {
-      padding-top: 80px; /* Add space below the fixed header */
+      padding-top: 100px; /* Adjusted for fixed header */
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
     }
 
-    .latest-news {
+    .news-box {
       background-color: #fff;
       border-radius: 8px;
-      border: 2px solid #4caf50; /* Green border */
+      border: 2px solid #4caf50;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       padding: 16px;
-      max-width: 600px;
+      max-width: 750px;
       width: 90%;
-      height: 400px; /* Fixed height for the box */
-      overflow-y: auto; /* Enables scrolling inside the box */
+      max-height: 500px;
+      overflow-y: auto; /* Enables scrolling */
     }
 
     .news-item {
@@ -68,39 +68,14 @@
       border-bottom: none;
     }
 
-    .news-tag {
-      display: inline-block;
-      background-color: #e0f7fa;
-      color: #00796b;
-      font-size: 0.875rem;
-      padding: 4px 8px;
-      border-radius: 12px;
-      margin-bottom: 8px;
-    }
-
-    .news-tag.technology {
-      background-color: #c8e6c9;
-      color: #2e7d32;
-    }
-
-    .news-tag.policy {
-      background-color: #ffe0b2;
-      color: #e65100;
-    }
-
-    .news-tag.success-stories {
-      background-color: #d1c4e9;
-      color: #4527a0;
-    }
-
     .news-item h3 {
-      font-size: 1.8rem;
+      font-size: 1.2rem;
       margin: 8px 0;
     }
 
     .news-item p {
       font-size: 0.95rem;
-      color: #010101;
+      color: #666;
     }
 
     .news-item a {
@@ -115,15 +90,15 @@
     }
 
     .news-date {
-      font-size: 1rem;
-      color: #000000;
+      font-size: 0.8rem;
+      color: #aaa;
       float: right;
     }
 
     .go-back {
       margin-top: 20px;
       display: inline-block;
-      background-color: #4caf50; /* Green color */
+      background-color: #4caf50;
       color: #fff;
       padding: 10px 20px;
       text-decoration: none;
@@ -133,83 +108,77 @@
     }
 
     .go-back:hover {
-      background-color: #45a049; /* Darker green on hover */
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
-  <!-- Header with Logo -->
+  <!-- Header -->
   <div class="header">
-    <img src="c:\\Users\\Lakhashree\\Downloads\\News.png" alt="Logo">
-    Latest News
+    <img src="https://media.istockphoto.com/id/950945604/vector/newspaper-icon-green-square-button.jpg?s=1024x1024&w=is&k=20&c=pgn7dGnUlgoHEXf5X-j3YiBimTgACH5-DAjYqIAfY3k=" alt="Logo">
+    Agriculture News
   </div>
 
-  <!-- Content Container -->
+  <!-- Content -->
   <div class="content-container">
-    <!-- News Section -->
-    <div class="latest-news">
+    <div class="news-box">
+      <!-- News Items -->
       <div class="news-item">
-        <div class="news-tag technology">Technology</div>
-        <h3>New Sustainable Farming Techniques</h3>
-        <p>Learn about the latest innovations in sustainable farming practices...</p>
-        <a href="#">Read more →</a>
-        <span class="news-date">2024-03-15</span>
+        <h3>Vintage Coffee Brews Up Domestic Expansion</h3>
+        <p>Amidst India's coffee boom, Vintage Coffee plans domestic expansion...</p>
+        <a href="https://www.thehindubusinessline.com/economy/agri-business/vintage-coffee-brews-up-domestic-expansion-amidst-indias-coffee-boom/article68905789.ece" target="_blank">Read more →</a>
+        <span class="news-date" data-offset-days="0"></span>
       </div>
 
       <div class="news-item">
-        <div class="news-tag policy">Policy</div>
-        <h3>Government Announces Farming Subsidies</h3>
-        <p>New policy changes bring additional support for local farmers...</p>
-        <a href="#">Read more →</a>
-        <span class="news-date">2024-03-14</span>
+        <h3>Managed Farmland: A Trending Future Concept</h3>
+        <p>Managed farmland is emerging as a positive and sustainable agricultural trend...</p>
+        <a href="https://www.thehindubusinessline.com/economy/agri-business/managed-farmland-is-a-trending-future-positive-concept-know-why/article68904846.ece" target="_blank">Read more →</a>
+        <span class="news-date" data-offset-days="0"></span>
       </div>
 
       <div class="news-item">
-        <div class="news-tag success-stories">Success Stories</div>
-        <h3>Organic Farming Success Stories</h3>
-        <p>Local farmers share their experiences with organic farming methods...</p>
-        <a href="#">Read more →</a>
-        <span class="news-date">2024-03-13</span>
+        <h3>India Gate Explores Mixed Spices & Rice Bran Oil</h3>
+        <p>India Gate diversifies beyond basmati into mixed spices and rice bran oil...</p>
+        <a href="https://economictimes.indiatimes.com/news/economy/agriculture/india-gate-sets-eyes-beyond-basmati-to-foray-into-mixed-spices-rice-bran-oil/articleshow/115622774.cms" target="_blank">Read more →</a>
+        <span class="news-date" data-offset-days="0"></span>
       </div>
 
       <div class="news-item">
-        <div class="news-tag technology">Technology</div>
-        <h3>AI in Agriculture</h3>
-        <p>Discover how artificial intelligence is transforming farming...</p>
-        <a href="#">Read more →</a>
-        <span class="news-date">2024-03-12</span>
+        <h3>Government Funds Innovations for Tomato Price Stability</h3>
+        <p>28 innovations funded to combat tomato price volatility and wastage...</p>
+        <a href="https://economictimes.indiatimes.com/news/economy/agriculture/government-funds-28-innovations-to-combat-tomato-price-volatility-and-wastage/articleshow/115567466.cms" target="_blank">Read more →</a>
+        <span class="news-date" data-offset-days="1"></span>
       </div>
 
       <div class="news-item">
-        <div class="news-tag policy">Policy</div>
-        <h3>New Water Conservation Laws</h3>
-        <p>Learn about recent regulations aimed at improving water use in farming...</p>
-        <a href="#">Read more →</a>
-        <span class="news-date">2024-03-11</span>
+        <h3>"Andhra Pradesh government urged to move new Tenancy Bill in Assembly"</h3>
+        <p>government urged to move new Tenancy Bill in Assembly...</p>
+        <a href="https://www.thehindu.com/news/national/andhra-pradesh/andhra-pradesh-government-urged-to-move-new-tenancy-bill-in-assembly/article68860186.ece" target="_blank">Read more →</a>
+        <span class="news-date" data-offset-days="1"></span>
       </div>
 
       <div class="news-item">
-        <div class="news-tag success-stories">Success Stories</div>
-        <h3>Farmers' Cooperatives Boost Yields</h3>
-        <p>Local farmers' cooperatives show significant productivity growth...</p>
-        <a href="#">Read more →</a>
-        <span class="news-date">2024-03-10</span>
+        <h3>Fifth Shipment of 720 Tonnes of Onion Reaches Delhi</h3>
+        <p>The government ships 720 tonnes of onions to stabilize market prices...</p>
+        <a href="https://economictimes.indiatimes.com/news/economy/agriculture/fifth-shipment-of-720-tonnes-of-onion-to-reach-delhi-on-november-21-government/articleshow/115455449.cms" target="_blank">Read more →</a>
+        <span class="news-date" data-offset-days="2"></span>
       </div>
     </div>
 
     <!-- Go Back Button -->
     <a href="Home.html" class="go-back">Go Back</a>
   </div>
+
   <script>
-    // Get today's date in YYYY-MM-DD format
-    const today = new Date().toISOString().split('T')[0];
-    
-    // Select all the date elements
-    const newsDates = document.querySelectorAll('.news-date');
-    
-    // Update each date element with today's date
-    newsDates.forEach(dateElement => {
-      dateElement.textContent = today;
+    // Dynamically calculate and set the dates
+    document.querySelectorAll(".news-date").forEach((dateElement) => {
+      const offsetDays = parseInt(dateElement.getAttribute("data-offset-days"), 10);
+      const today = new Date();
+      const targetDate = new Date(today);
+      targetDate.setDate(today.getDate() - offsetDays);
+      const formattedDate = targetDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+      dateElement.textContent = formattedDate;
     });
   </script>
 </body>
