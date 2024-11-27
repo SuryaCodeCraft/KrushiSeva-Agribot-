@@ -51,12 +51,14 @@
         }
         .market-container {
             width: 400px;
+            max-height: 400px; /* Limit the height of the container */
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-top: 100px; /* Adjusted for header height */
             margin-bottom: 20px;
+            overflow-y: auto; /* Enable vertical scrolling */
         }
         .market-title {
             font-size: 1.5rem;
@@ -107,6 +109,20 @@
         }
         .go-back:hover {
             background-color: #218838;
+        }
+        .know-more {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        .know-more:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -173,7 +189,54 @@
                 <span class="arrow">⬇</span> -0.5%
             </div>
         </div>
+        <!-- New Vegetables and Fruits -->
+        <div class="market-item">
+            <div>
+                <div class="crop-name">Tomatoes</div>
+                <div class="crop-price">Current Price: $180/ton</div>
+            </div>
+            <div class="price-change up">
+                <span class="arrow">⬆</span> +5.2%
+            </div>
+        </div>
+        <div class="market-item">
+            <div>
+                <div class="crop-name">Potatoes</div>
+                <div class="crop-price">Current Price: $150/ton</div>
+            </div>
+            <div class="price-change down">
+                <span class="arrow">⬇</span> -2.1%
+            </div>
+        </div>
+        <div class="market-item">
+            <div>
+                <div class="crop-name">Carrots</div>
+                <div class="crop-price">Current Price: $220/ton</div>
+            </div>
+            <div class="price-change up">
+                <span class="arrow">⬆</span> +1.7%
+            </div>
+        </div>
+        <div class="market-item">
+            <div>
+                <div class="crop-name">Bananas</div>
+                <div class="crop-price">Current Price: $300/ton</div>
+            </div>
+            <div class="price-change up">
+                <span class="arrow">⬆</span> +3.0%
+            </div>
+        </div>
+        <div class="market-item">
+            <div>
+                <div class="crop-name">Apples</div>
+                <div class="crop-price">Current Price: $350/ton</div>
+            </div>
+            <div class="price-change down">
+                <span class="arrow">⬇</span> -1.4%
+            </div>
+        </div>
     </div>
+    <a href="https://agmarknet.gov.in/" class="know-more" target="_blank">Know More Prices</a>
     <a href="Home.html" class="go-back">Go Back</a>
 </body>
 </html>
