@@ -145,6 +145,22 @@
     a {
       text-decoration: none;
     }
+
+    .know-more {
+      margin-top: 10px;
+      display: block;
+      text-align: center;
+      background-color: #e74c3c; /* Red background */
+      padding: 10px 20px;
+      color: white;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .know-more:hover {
+      background-color: #c0392b; /* Darker red on hover */
+    }
   </style>
 </head>
 <body>
@@ -191,6 +207,11 @@
     <div class="message-box" id="message-box">
       Weather conditions are mild today.
     </div>
+
+    <a href="https://weather.com/en-IN/weather/today/l/13.03,77.69?par=google" class="know-more" target="_blank">
+      Know More
+    </a>
+    
   </div>
 
   <a href="Home.html">
@@ -201,19 +222,19 @@
     // Weekday names
     const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    // Get current day and time
+    // Get today's date and day
     const today = new Date();
-    const currentHour = today.getHours();
     const currentDay = today.getDay();
 
-    // Update forecast day names
+    // Update forecast day names dynamically
     for (let i = 0; i < 4; i++) {
+      const forecastDay = (currentDay + i + 1) % 7; // Rotate days for forecast
       const dayElement = document.getElementById(`day${i + 1}`);
-      const forecastDay = (currentDay + i) % 7; // Rotate through the week
       dayElement.textContent = i === 0 ? "Tomorrow" : weekdays[forecastDay];
     }
 
-    // Change weather based on time of day
+    // Change weather based on the current time of day
+    const currentHour = today.getHours();
     const currentCondition = document.getElementById("current-condition");
     const currentTemp = document.getElementById("current-temp");
     const currentIcon = document.getElementById("current-icon");
