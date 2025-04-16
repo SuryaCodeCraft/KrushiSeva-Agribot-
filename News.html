@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Krushiseva - Agriculture News</title>
   <style>
     body {
@@ -18,7 +18,7 @@
     }
 
     .header {
-      background-color: #4caf50; /* Green color for header */
+      background-color: #4caf50;
       color: #fff;
       width: 100%;
       padding: 15px;
@@ -35,12 +35,12 @@
     }
 
     .header img {
-      height: 75px; /* Adjusted logo size */
+      height: 75px;
       margin-right: 10px;
     }
 
     .content-container {
-      padding-top: 100px; /* Adjusted for fixed header */
+      padding-top: 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -56,7 +56,7 @@
       max-width: 750px;
       width: 90%;
       max-height: 500px;
-      overflow-y: auto; /* Enables scrolling */
+      overflow-y: auto;
     }
 
     .news-item {
@@ -119,67 +119,49 @@
     Agriculture News
   </div>
 
-  <!-- Content -->
+  <!-- News Content -->
   <div class="content-container">
     <div class="news-box">
-      <!-- News Items -->
-      <div class="news-item">
-        <h3>Vintage Coffee Brews Up Domestic Expansion</h3>
-        <p>Amidst India's coffee boom, Vintage Coffee plans domestic expansion...</p>
-        <a href="https://www.thehindubusinessline.com/economy/agri-business/vintage-coffee-brews-up-domestic-expansion-amidst-indias-coffee-boom/article68905789.ece" target="_blank">Read more →</a>
-        <span class="news-date" data-offset-days="0"></span>
-      </div>
-
-      <div class="news-item">
-        <h3>Managed Farmland: A Trending Future Concept</h3>
-        <p>Managed farmland is emerging as a positive and sustainable agricultural trend...</p>
-        <a href="https://www.thehindubusinessline.com/economy/agri-business/managed-farmland-is-a-trending-future-positive-concept-know-why/article68904846.ece" target="_blank">Read more →</a>
-        <span class="news-date" data-offset-days="0"></span>
-      </div>
-
-      <div class="news-item">
-        <h3>India Gate Explores Mixed Spices & Rice Bran Oil</h3>
-        <p>India Gate diversifies beyond basmati into mixed spices and rice bran oil...</p>
-        <a href="https://economictimes.indiatimes.com/news/economy/agriculture/india-gate-sets-eyes-beyond-basmati-to-foray-into-mixed-spices-rice-bran-oil/articleshow/115622774.cms" target="_blank">Read more →</a>
-        <span class="news-date" data-offset-days="0"></span>
-      </div>
-
-      <div class="news-item">
-        <h3>Government Funds Innovations for Tomato Price Stability</h3>
-        <p>28 innovations funded to combat tomato price volatility and wastage...</p>
-        <a href="https://economictimes.indiatimes.com/news/economy/agriculture/government-funds-28-innovations-to-combat-tomato-price-volatility-and-wastage/articleshow/115567466.cms" target="_blank">Read more →</a>
-        <span class="news-date" data-offset-days="1"></span>
-      </div>
-
-      <div class="news-item">
-        <h3>"Andhra Pradesh government urged to move new Tenancy Bill in Assembly"</h3>
-        <p>government urged to move new Tenancy Bill in Assembly...</p>
-        <a href="https://www.thehindu.com/news/national/andhra-pradesh/andhra-pradesh-government-urged-to-move-new-tenancy-bill-in-assembly/article68860186.ece" target="_blank">Read more →</a>
-        <span class="news-date" data-offset-days="1"></span>
-      </div>
-
-      <div class="news-item">
-        <h3>Fifth Shipment of 720 Tonnes of Onion Reaches Delhi</h3>
-        <p>The government ships 720 tonnes of onions to stabilize market prices...</p>
-        <a href="https://economictimes.indiatimes.com/news/economy/agriculture/fifth-shipment-of-720-tonnes-of-onion-to-reach-delhi-on-november-21-government/articleshow/115455449.cms" target="_blank">Read more →</a>
-        <span class="news-date" data-offset-days="2"></span>
-      </div>
+      <p>Loading latest agriculture news...</p>
     </div>
-
-    <!-- Go Back Button -->
-    <a href="index.html" class="go-back">Go Back</a>
+    <a href="index.html" class="go-back">← Go Back</a>
   </div>
 
   <script>
-    // Dynamically calculate and set the dates
-    document.querySelectorAll(".news-date").forEach((dateElement) => {
-      const offsetDays = parseInt(dateElement.getAttribute("data-offset-days"), 10);
-      const today = new Date();
-      const targetDate = new Date(today);
-      targetDate.setDate(today.getDate() - offsetDays);
-      const formattedDate = targetDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-      dateElement.textContent = formattedDate;
-    });
+    const apiKey = "pub_80844fb10d63e9cabcb1e39ed89bfaef6d9a9";
+    const newsContainer = document.querySelector(".news-box");
+
+    async function fetchAgricultureNews() {
+      try {
+        const response = await fetch(
+          `https://newsdata.io/api/1/news?apikey=${apiKey}&q=agriculture&language=en&country=in`
+        );
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+          newsContainer.innerHTML = ""; // Clear loading text
+          data.results.slice(0, 8).forEach((item) => {
+            const date = new Date(item.pubDate).toISOString().split("T")[0];
+            const newsHTML = `
+              <div class="news-item">
+                <h3>${item.title}</h3>
+                <p>${item.description || "No summary available."}</p>
+                <a href="${item.link}" target="_blank">Read more →</a>
+                <span class="news-date">${date}</span>
+              </div>
+            `;
+            newsContainer.innerHTML += newsHTML;
+          });
+        } else {
+          newsContainer.innerHTML = "<p>No news articles found.</p>";
+        }
+      } catch (error) {
+        console.error("Error fetching news:", error);
+        newsContainer.innerHTML = "<p>Failed to load news. Please try again later.</p>";
+      }
+    }
+
+    fetchAgricultureNews();
   </script>
 </body>
 </html>
