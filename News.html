@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Krushiseva - Agriculture News</title>
   <style>
+    /* Your same CSS styles, unchanged */
     body {
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
@@ -113,6 +114,11 @@
   </style>
 </head>
 <body>
+    <div id="google_translate_element"></div>
+
+  <!-- Google Translate Element -->
+  <div id="google_translate_element" style="position: absolute; top: 10px; right: 10px;"></div>
+
   <!-- Header -->
   <div class="header">
     <img src="https://media.istockphoto.com/id/950945604/vector/newspaper-icon-green-square-button.jpg?s=1024x1024&w=is&k=20&c=pgn7dGnUlgoHEXf5X-j3YiBimTgACH5-DAjYqIAfY3k=" alt="Logo">
@@ -127,19 +133,18 @@
     <a href="index.html" class="go-back">← Go Back</a>
   </div>
 
+  <!-- Fetch News Script -->
   <script>
     const apiKey = "pub_80844fb10d63e9cabcb1e39ed89bfaef6d9a9";
     const newsContainer = document.querySelector(".news-box");
 
     async function fetchAgricultureNews() {
       try {
-        const response = await fetch(
-          `https://newsdata.io/api/1/news?apikey=${apiKey}&q=agriculture&language=en&country=in`
-        );
+        const response = await fetch(`https://newsdata.io/api/1/news?apikey=${apiKey}&q=agriculture&language=en&country=in`);
         const data = await response.json();
 
         if (data.results && data.results.length > 0) {
-          newsContainer.innerHTML = ""; // Clear loading text
+          newsContainer.innerHTML = "";
           data.results.slice(0, 8).forEach((item) => {
             const date = new Date(item.pubDate).toISOString().split("T")[0];
             const newsHTML = `
@@ -163,5 +168,82 @@
 
     fetchAgricultureNews();
   </script>
+
+  <!-- Google Translate Script + Cookie Handling -->
+  <script>
+    function setCookie(name, value, days) {
+      const expires = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+      return document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=');
+        return parts[0] === name ? decodeURIComponent(parts[1]) : r
+      }, '');
+    }
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+
+    // Load previously selected language
+    const savedLang = getCookie("selectedLang");
+    if (savedLang) {
+      document.cookie = `googtrans=/en/${savedLang};path=/`;
+    }
+
+    // Load Google Translate
+    (function () {
+      const script = document.createElement('script');
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      document.head.appendChild(script);
+    })();
+
+    // Observe changes in selected language
+    const observer = new MutationObserver(() => {
+      const langMatch = document.cookie.match(/googtrans=\/en\/(\w+)/);
+      if (langMatch) {
+        setCookie("selectedLang", langMatch[1], 365);
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
+   <script>
+    // Initialize Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+  
+    // Load translate script
+    (function() {
+      var gtScript = document.createElement('script');
+      gtScript.type = 'text/javascript';
+      gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      document.head.appendChild(gtScript);
+    })();
+  
+    // Persist translation across pages
+    const currentLang = sessionStorage.getItem("selectedLang");
+  
+    if (currentLang) {
+      document.cookie = `googtrans=/en/${currentLang};path=/;`;
+    }
+  
+    // Detect and save language selection (once user changes it)
+    const observer = new MutationObserver(() => {
+      const frame = document.querySelector("iframe.goog-te-banner-frame");
+      if (frame) {
+        const lang = document.cookie.match(/\/en\/(\w+)/);
+        if (lang && lang[1]) {
+          sessionStorage.setItem("selectedLang", lang[1]);
+        }
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
+  
+
 </body>
 </html>
