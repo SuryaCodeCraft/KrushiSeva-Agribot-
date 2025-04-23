@@ -127,6 +127,7 @@
     </style>
 </head>
 <body>
+    <div id="google_translate_element"></div>
     <div class="header">
         <div class="header-content">
             <div class="header-logo">L</div> <!-- Placeholder logo -->
@@ -237,6 +238,39 @@
         </div>
     </div>
     <a href="https://agmarknet.gov.in/" class="know-more" target="_blank">Know More Prices</a>
-    <a href="index.html" class="go-back">Go Back</a>
+    <a href="Home.html" class="go-back">Go Back</a>
+    <script>
+        // Initialize Google Translate
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+      
+        // Load translate script
+        (function() {
+          var gtScript = document.createElement('script');
+          gtScript.type = 'text/javascript';
+          gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          document.head.appendChild(gtScript);
+        })();
+      
+        // Persist translation across pages
+        const currentLang = sessionStorage.getItem("selectedLang");
+      
+        if (currentLang) {
+          document.cookie = `googtrans=/en/${currentLang};path=/;`;
+        }
+      
+        // Detect and save language selection (once user changes it)
+        const observer = new MutationObserver(() => {
+          const frame = document.querySelector("iframe.goog-te-banner-frame");
+          if (frame) {
+            const lang = document.cookie.match(/\/en\/(\w+)/);
+            if (lang && lang[1]) {
+              sessionStorage.setItem("selectedLang", lang[1]);
+            }
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      </script>
 </body>
 </html>
