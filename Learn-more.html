@@ -14,7 +14,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background-image: url("learn-more background .png"); /* Replace with your background image URL */
+      background-image: url('learn-more background.png'); /* Replace with your background image URL */
       background-size: cover;
       background-position: center;
     }
@@ -149,6 +149,7 @@
   </style>
 </head>
 <body>
+  <div id="google_translate_element"></div>
 
   <header>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTov17mBqhnfRVjlVr8TPED5zh5dFdhokELoOaXSZ0fRQV0V_z-nsm55ajed94Nl1GVUXU&usqp=CAU" alt="Left Logo" class="header-logo-left">
@@ -211,6 +212,39 @@
   </div>
 
   <a href="index.html" class="back-home">← Back to Home</a>
+  <script>
+    // Initialize Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+  
+    // Load translate script
+    (function() {
+      var gtScript = document.createElement('script');
+      gtScript.type = 'text/javascript';
+      gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      document.head.appendChild(gtScript);
+    })();
+  
+    // Persist translation across pages
+    const currentLang = sessionStorage.getItem("selectedLang");
+  
+    if (currentLang) {
+      document.cookie = `googtrans=/en/${currentLang};path=/;`;
+    }
+  
+    // Detect and save language selection (once user changes it)
+    const observer = new MutationObserver(() => {
+      const frame = document.querySelector("iframe.goog-te-banner-frame");
+      if (frame) {
+        const lang = document.cookie.match(/\/en\/(\w+)/);
+        if (lang && lang[1]) {
+          sessionStorage.setItem("selectedLang", lang[1]);
+        }
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
 
 </body>
 </html>
